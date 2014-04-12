@@ -24,5 +24,5 @@ template "/etc/php5/fpm/php-fpm.conf" do
     owner    "root"
     group    "root"
     mode     0644
-    notifies :restart, resources(:service => "php5-fpm")
+    notifies :reload, resources(:service => "php5-fpm")
 end
