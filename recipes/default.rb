@@ -26,3 +26,11 @@ template "/etc/php5/fpm/php-fpm.conf" do
     mode     0644
     notifies :reload, resources(:service => "php5-fpm")
 end
+
+template "/etc/php5/fpm/pool.d/www.conf" do 
+    source   "pool.d/www.conf.erb"
+    owner    "root"
+    group    "root"
+    mode     0644
+    notifies :reload, resources(:service => "php5-fpm")
+end
