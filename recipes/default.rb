@@ -1,0 +1,28 @@
+#
+# Cookbook Name:: php-fpm
+# Recipe:: default
+#
+# Copyright 2014, Zephpyr.com
+#
+# All rights reserved - Do Not Redistribute
+#
+package "php5-common" do
+    action :install    
+end
+
+package "php5-fpm" do
+    action :install    
+end
+
+service "php5-fpm" do
+    supports :start => true, :stop => true, :status => true, :restart => true, :reload => true
+    action :nothing
+end
+
+template "/etc/php5/fpm/php-fpm.conf" do 
+    source   "php-fpm.conf.erb"
+    owner    "root"
+    group    "root"
+    mode     0644
+    notifies :restart, resources(:service => "php5-fpm")
+end
